@@ -1,0 +1,44 @@
+###################################
+#   Voxellized activity phantom   #
+###################################
+
+# Add source with keyword "voxel" to declare the type
+/gate/source/addSource                                            phantom voxel
+# Source will be entered using "image" data
+/gate/source/phantom/reader/insert                              image
+
+# Use the range translator
+/gate/source/phantom/imageReader/translator/insert              range
+# Range translator filename
+/gate/source/phantom/imageReader/rangeTranslator/readTable      {act_rng_fn}
+/gate/source/phantom/imageReader/rangeTranslator/describe       1
+
+# Binary image filename
+/gate/source/phantom/imageReader/readFile                       {act_fn}
+/gate/source/phantom/imageReader/verbose                        1
+
+# Source position
+# The default position is in the 1ST quadrant so the source has to be shifted by half of its
+# length in the negative direction along each axis.
+/gate/source/phantom/setPosition                                 {x_off_src} {y_off_src} {bed_pos_source} mm
+/gate/source/phantom/dump                                       1
+
+# Photon emission type
+#/gate/source/phantom/setType backtoback
+#/gate/source/phantom/gps/particle gamma
+#/gate/source/phantom/setForcedUnstableFlag true
+#/gate/source/phantom/setForcedHalfLife 6586.2 s
+#/gate/source/phantom/gps/energytype Mono
+#/gate/source/phantom/gps/monoenergy 0.511 MeV
+#/gate/source/phantom/gps/angtype iso
+
+/gate/source/phantom/gps/particle ion
+/gate/source/phantom/gps/ion 9 18 0 0
+/gate/source/phantom/gps/monoenergy 0. keV
+/gate/source/phantom/setForcedUnstableFlag true # WARNING - DEBUG - New command line to debug the use of ion particle type
+/gate/source/phantom/useDefaultHalfLife
+
+#/gate/source/phantom/gps/particle e+
+#/gate/source/phantom/gps/energytype Fluor18
+#/gate/source/phantom/setForcedUnstableFlag true
+#/gate/source/phantom/setForcedHalfLife 6586 s

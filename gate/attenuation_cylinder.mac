@@ -1,0 +1,51 @@
+# Water interior cylinder
+/gate/world/daughters/name                        solution
+/gate/world/daughters/insert cylinder
+/gate/solution/geometry/setRmin   0. mm
+/gate/solution/geometry/setRmax   {cyl_inner_rad} mm
+/gate/solution/geometry/setHeight {cyl_inner_len} mm
+/gate/solution/placement/setTranslation            {y_off} {x_off} {bed_pos} mm
+/gate/solution/placement/setRotationAxis           {rot_axis}
+/gate/solution/placement/setRotationAngle          {rot_angle} deg
+/gate/solution/setMaterial Water
+/gate/solution/describe
+/gate/solution/attachPhantomSD        1
+
+# Housing exterior cylinder
+/gate/world/daughters/name                        housing_cyl
+/gate/world/daughters/insert cylinder
+/gate/housing_cyl/geometry/setRmin   {cyl_inner_rad} mm
+/gate/housing_cyl/geometry/setRmax   {cyl_outer_rad} mm
+/gate/housing_cyl/geometry/setHeight {cyl_inner_len} mm
+/gate/housing_cyl/placement/setTranslation            {y_off} {x_off} {bed_pos} mm
+/gate/housing_cyl/placement/setRotationAxis           {rot_axis}
+/gate/housing_cyl/placement/setRotationAngle          {rot_angle} deg
+/gate/housing_cyl/setMaterial {housing_material}
+/gate/housing_cyl/describe
+/gate/housing_cyl/attachPhantomSD        1
+
+# Housing top
+/gate/world/daughters/name                        housing_top
+/gate/world/daughters/insert cylinder
+/gate/housing_top/geometry/setRmin   0 mm
+/gate/housing_top/geometry/setRmax   {cyl_outer_rad} mm
+/gate/housing_top/geometry/setHeight {cyl_end_len} mm
+/gate/housing_top/placement/setTranslation            {y_off} {x_off} {cyl_top_pos} mm
+/gate/housing_top/placement/setRotationAxis           {rot_axis}
+/gate/housing_top/placement/setRotationAngle          {rot_angle} deg
+/gate/housing_top/setMaterial {housing_material}
+/gate/housing_top/describe
+/gate/housing_top/attachPhantomSD        1
+
+# Housing bottom
+/gate/world/daughters/name                        housing_btm
+/gate/world/daughters/insert cylinder
+/gate/housing_btm/geometry/setRmin   0 mm
+/gate/housing_btm/geometry/setRmax   {cyl_outer_rad} mm
+/gate/housing_btm/geometry/setHeight {cyl_end_len} mm
+/gate/housing_btm/placement/setTranslation            {y_off} {x_off} {cyl_btm_pos} mm
+/gate/housing_btm/placement/setRotationAxis           {rot_axis}
+/gate/housing_btm/placement/setRotationAngle          {rot_angle} deg
+/gate/housing_btm/setMaterial {housing_material}
+/gate/housing_btm/describe
+/gate/housing_btm/attachPhantomSD        1

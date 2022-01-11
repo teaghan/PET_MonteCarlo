@@ -1,0 +1,26 @@
+# VOXELIZED PHANTOM BASED ON PATIENT DATA
+/gate/world/daughters/name                        patient
+
+# Parameterization method
+/gate/world/daughters/insert                      ImageNestedParametrisedVolume
+#/gate/world/daughters/insert                      ImageRegularParametrisedVolume
+#/gate/world/daughters/insert                       ImageRegionalizedVolume
+
+# Binary image filename
+/gate/patient/geometry/setImage                   {atn_fn}
+
+# Range translator filename
+/gate/patient/geometry/setRangeToMaterialFile     {atn_rng_fn}
+
+# Position of phantom
+/gate/patient/placement/setTranslation            {x_off} {y_off} {bed_pos_atten} mm
+#/gate/patient/placement/setRotationAxis           1 0 0
+#/gate/patient/placement/setRotationAngle          {x_rot} deg
+
+# Only works for ImageRegularParametrisedVolume
+#/gate/patient/setSkipEqualMaterials           {skip_eq_mat}
+
+/gate/patient/describe
+
+# Save info on Rayleigh and Compton interactions within phantom
+/gate/patient/attachPhantomSD        1

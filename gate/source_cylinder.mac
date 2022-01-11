@@ -1,0 +1,61 @@
+###################################
+#       Line source activity      #
+###################################
+
+
+# Add source with keyword "voxel" to declare the type
+/gate/source/addSource                                            phantom
+
+# Define activity
+/gate/source/phantom/setActivity {cyl_act} Bq
+
+# Source position
+# The default position is in the 1ST quadrant so the source has to be shifted by half of its
+# length in the negative direction along each axis.
+/gate/source/phantom/gps/type Volume
+/gate/source/phantom/gps/shape Cylinder
+/gate/source/phantom/gps/radius {cyl_inner_rad} mm
+/gate/source/phantom/gps/halfz  {cyl_half_len} mm
+/gate/source/phantom/gps/centre {y_off} {x_off} {bed_pos} mm
+/gate/source/phantom/gps/pos/rot1 {new_y}
+/gate/source/phantom/gps/pos/rot2 {new_x}
+
+
+# Photon emission type
+#/gate/source/phantom/setType backtoback
+#/gate/source/phantom/gps/particle gamma
+#/gate/source/phantom/setForcedUnstableFlag true
+#/gate/source/phantom/setForcedHalfLife 6586.2 s
+#/gate/source/phantom/gps/energytype Mono
+#/gate/source/phantom/gps/monoenergy 0.511 MeV
+#/gate/source/phantom/gps/angtype iso
+
+/gate/source/phantom/gps/particle ion
+/gate/source/phantom/gps/ion 9 18 0 0
+/gate/source/phantom/gps/monoenergy 0. keV
+/gate/source/phantom/setForcedUnstableFlag true # WARNING - DEBUG - New command line to debug the use of ion particle type
+/gate/source/phantom/useDefaultHalfLife
+/gate/source/phantom/gps/angtype iso
+
+#/gate/source/phantom/gps/particle e+
+#/gate/source/phantom/gps/energytype Fluor18
+#/gate/source/phantom/setForcedUnstableFlag true
+#/gate/source/phantom/setForcedHalfLife 6586 s
+#/gate/source/phantom/gps/angtype iso
+#/gate/source/phantom/gps/mintheta 0. deg
+#/gate/source/phantom/gps/maxtheta 180. deg
+#/gate/source/phantom/gps/minphi 0. deg
+#/gate/source/phantom/gps/maxphi 360. deg
+
+#/gate/source/addSource F18LineSource
+#/gate/source/F18LineSource/setActivity {cyl_act} Bq
+#/gate/source/F18LineSource/gps/particle e+
+#/gate/source/F18LineSource/setForcedUnstableFlag true
+#/gate/source/F18LineSource/setForcedHalfLife 6586.2 s
+#/gate/source/F18LineSource/gps/energytype Fluor18
+#/gate/source/F18LineSource/gps/type Volume
+#/gate/source/F18LineSource/gps/shape Cylinder
+#/gate/source/F18LineSource/gps/radius {cyl_inner_rad} mm
+#/gate/source/F18LineSource/gps/halfz {cyl_half_len} mm
+#/gate/source/F18LineSource/gps/angtype iso
+#/gate/source/F18LineSource/gps/centre 0. 0. 0. cm

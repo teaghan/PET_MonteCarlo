@@ -1,0 +1,76 @@
+#
+#     W O R L D
+#
+/gate/world/geometry/setXLength 400 cm
+/gate/world/geometry/setYLength 400 cm
+/gate/world/geometry/setZLength 400 cm
+
+/gate/world/setMaterial Air
+/gate/world/describe
+
+#/gate/world/vis/setVisible 0
+
+#
+#      System Type ecat 
+#
+/gate/world/daughters/name gantry
+/gate/world/daughters/systemType ecat
+/gate/world/daughters/insert cylinder
+
+
+/gate/gantry/geometry/setRmax 46. cm
+/gate/gantry/geometry/setRmin 41. cm
+/gate/gantry/geometry/setHeight 27.0 cm
+/gate/gantry/placement/setTranslation 0.0 0.0 0.0 cm
+/gate/gantry/setMaterial Air
+/gate/gantry/vis/forceWireframe
+/gate/gantry/vis/setVisible 0
+
+#        BLOCK  428 + 20/2 rounded to 438
+#	 so that gaps are looking like 1 crystal (4 mm)
+#        we will assume 200 micron VM2000 wraping
+
+/gate/gantry/daughters/name block
+/gate/gantry/daughters/insert box
+/gate/block/geometry/setXLength 20.0 mm
+/gate/block/geometry/setYLength 52.0 mm
+/gate/block/geometry/setZLength 52.0 mm
+/gate/block/placement/setTranslation 438. 0. 0. mm
+/gate/block/setMaterial VM2000
+/gate/block/vis/forceWireframe
+/gate/block/vis/setColor blue
+
+#	CRYSTALS IN THE BLOCK
+
+/gate/block/daughters/name crystal
+/gate/block/daughters/insert box
+/gate/crystal/geometry/setXLength 20. mm
+/gate/crystal/geometry/setYLength 3.98 mm
+/gate/crystal/geometry/setZLength 3.98 mm
+/gate/crystal/placement/setTranslation 0 0 0 mm
+/gate/crystal/setMaterial LSO
+/gate/crystal/vis/forceWireframe
+/gate/crystal/vis/setColor yellow
+
+#	REPEAT    CRYSTAL
+
+/gate/crystal/repeaters/insert cubicArray
+/gate/crystal/cubicArray/setRepeatNumberX 1
+/gate/crystal/cubicArray/setRepeatNumberY 13
+/gate/crystal/cubicArray/setRepeatNumberZ 13
+/gate/crystal/cubicArray/setRepeatVector  0. 4. 4. mm
+  
+#	REPEAT   BLOCK 
+#	block pitch was 56.9 on drawing
+# 	axially and transaxially gaps should 1 crystal
+
+/gate/block/repeaters/insert linear
+/gate/block/linear/setRepeatNumber 4
+/gate/block/linear/setRepeatVector 0. 0. 56. mm
+/gate/block/repeaters/insert ring
+/gate/block/ring/setRepeatNumber 48
+/gate/block/ring/setFirstAngle -4.28572 deg
+
+/gate/systems/gantry/block/attach block   
+/gate/systems/gantry/crystal/attach crystal 
+/gate/crystal/attachCrystalSD 

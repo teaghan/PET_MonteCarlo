@@ -1,0 +1,78 @@
+# VERBOSE
+/control/verbose          0
+/run/verbose              0
+/event/verbose            0
+
+# VISUALIZATION
+#/control/execute visu.mac
+/vis/disable
+
+# INITIALIZE MATERIALS
+/gate/geometry/setMaterialDatabase GateMaterials.db
+
+# WORLD
+#/gate/world/geometry/setXLength 100 cm
+#/gate/world/geometry/setYLength 100 cm
+#/gate/world/geometry/setZLength 80 cm
+#/gate/world/setMaterial Air
+#/gate/world/vis/setVisible 1
+
+# SCANNER
+/control/execute mct4r_gantry.mac
+/gate/systems/ecat/describe
+/gate/systems/ecat/verbose 0
+
+# ATTENUATION PHANTOM
+/control/execute {attn_mac}
+
+# PHYSICS
+/control/execute physics.mac
+
+# INITIALIZATION
+/gate/run/initialize
+
+# DETECTOR
+/control/execute digitizer.mac
+
+/gate/verbose Physic    0
+/gate/verbose Cuts      0
+/gate/verbose SD        0
+/gate/verbose Actions   0
+/gate/verbose Actor     0
+/gate/verbose Step      0
+/gate/verbose Error     0
+/gate/verbose Warning   0
+/gate/verbose Output    0
+/gate/verbose Beam      0
+/gate/verbose Volume    0
+/gate/verbose Image     0
+/gate/verbose Geometry  0
+/gate/verbose Core      0
+/run/verbose 0
+/event/verbose 0
+/tracking/verbose 0
+
+# RANDOM SEED
+/gate/random/setEngineName MersenneTwister
+/gate/random/setEngineSeed auto
+
+# SOURCE
+/control/execute {source_mac}
+/gate/source/list 
+
+# OUTPUT
+/gate/output/verbose 0
+/gate/output/root/enable
+/gate/output/ascii/disable
+# Set filename for output root file
+/gate/output/root/setFileName {root_fn}
+
+/gate/output/root/setRootHitFlag 0
+/gate/output/root/setRootSinglesFlag 0
+/gate/output/root/setRootCoincidencesFlag 1
+
+# START
+/gate/application/setTimeSlice     {TimeSlice} s
+/gate/application/setTimeStart     {TimeStart} s
+/gate/application/setTimeStop      {TimeStop} s
+/gate/application/startDAQ

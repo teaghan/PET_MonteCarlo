@@ -1,0 +1,69 @@
+#	Step 5: D I G I T I Z E R 
+#
+# READOUT  
+/gate/digitizer/verbose 0
+/gate/digitizer/Singles/insert adder
+/gate/digitizer/Singles/insert readout
+/gate/digitizer/Singles/readout/setPolicy TakeEnergyCentroid
+# Winner
+# Usera guide says about Policy
+# TakeEnergyCentroid (blockPMT readout, depth forced at level above xtal)
+# TakeEnergyWinner (APD readout ignore setDepth)
+
+# Digitizer for mct
+
+/gate/digitizer/Singles/readout/setDepth 1
+
+# Time blurring
+/gate/digitizer/Singles/insert timeResolution
+/gate/digitizer/Singles/timeResolution/setTimeResolution {time_blur} ns
+
+# ENERGY BLURRING
+/gate/digitizer/Singles/insert blurring
+/gate/digitizer/Singles/blurring/setLaw inverseSquare
+/gate/digitizer/Singles/blurring/inverseSquare/setResolution {ener_res}
+/gate/digitizer/Singles/blurring/inverseSquare/setEnergyOfReference 511. keV
+
+# CRYSTAL BLURRING
+/gate/digitizer/Singles/insert crystalblurring
+/gate/digitizer/Singles/crystalblurring/setCrystalResolutionMin {cryst_res_min}
+/gate/digitizer/Singles/crystalblurring/setCrystalResolutionMax {cryst_res_max}
+/gate/digitizer/Singles/crystalblurring/setCrystalQE {quant_eff}
+/gate/digitizer/Singles/crystalblurring/setCrystalEnergyOfReference 511. keV
+
+# ENERGY CUT
+/gate/digitizer/Singles/insert thresholder
+/gate/digitizer/Singles/thresholder/setThreshold 435. keV
+/gate/digitizer/Singles/insert upholder
+/gate/digitizer/Singles/upholder/setUphold 650. keV
+# PLACE THE SINGLE PULSE IN THE MIDDLE OF THE CRYSTAL WHERE THE SINGLE OCCURRED
+#/gate/digitizer/Singles/insert discretizer
+/gate/digitizer/Singles/describe
+
+#	C O I N C I    S O R T E R 
+# window = sqrt(84.2*84.2 +22*22)/15=5.8 ns
+/gate/digitizer/Coincidences/setInputName Singles
+/gate/digitizer/Coincidences/setWindow {coinc_window} ns
+/gate/digitizer/Coincidences/setOffset 0. ns
+#fan is 37 blocks from 48 => (48-37 blocs -1)/2 =5
+/gate/digitizer/Coincidences/minSectorDifference 5
+#/gate/digitizer/Coincidences/MultiplesPolicy takeWinnerOfGoods
+/gate/digitizer/Coincidences/MultiplesPolicy {multi_policy}
+/gate/digitizer/Coincidences/describe
+
+# Delay
+
+/gate/digitizer/name delay
+/gate/digitizer/insert coincidenceSorter
+/gate/digitizer/delay/setWindow {coinc_window} ns
+/gate/digitizer/delay/setOffset 500. ns
+/gate/digitizer/delay/describe
+
+# Final
+
+#/gate/digitizer/name finalCoinc
+#/gate/digitizer/insert coincidenceChain
+#/gate/digitizer/finalCoinc/addInputName delay
+#/gate/digitizer/finalCoinc/addInputName Coincidences
+#/gate/digitizer/finalCoinc/usePriority true
+#/gate/digitizer/finalCoinc/describe

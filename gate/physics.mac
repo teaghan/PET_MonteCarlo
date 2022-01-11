@@ -1,0 +1,10 @@
+#
+# use List rather tean individual processes, add decay for sources ion
+#
+/gate/physics/addPhysicsList emstandard_opt3
+/gate/physics/addProcess RadioactiveDecay
+#/gate/physics/SetMinKineticEnergyInRegion world 100 keV
+#/gate/physics/setEMin 0.1 keV
+#/gate/physics/setEMax 1 GeV
+#/gate/physics/processList Enabled
+#/gate/physics/processList Initialized
