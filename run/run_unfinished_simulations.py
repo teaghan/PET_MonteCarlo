@@ -28,7 +28,6 @@ job_time = config['Simulation']['job_time']
 # Memory per job in GB
 mem = config['Simulation']['mem']
 
-#'''
 print('Checking %i jobs' % (num_jobs))
 for n in range(1, num_jobs+1):
     # Determine if the current job needs to be rerun
@@ -60,7 +59,6 @@ for n in range(1, num_jobs+1):
         os.system('rm %s' % (root_fn))
     if (n+1)%500==0:
         print('%i complete' % (n+1))
-#'''
         
 # Compute-canada goodies command
 cmd = 'python ../../../compute-canada-goodies/python/queue_cc.py '
