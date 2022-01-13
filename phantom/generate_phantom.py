@@ -4,7 +4,6 @@ import numpy as np
 import configparser
 import shutil
 from distutils import util
-from setup_recon import save_atten_map, save_normalization, create_steps
 
 # Command line arguments
 patient_name = sys.argv[1]
