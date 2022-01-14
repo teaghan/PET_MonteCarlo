@@ -1,5 +1,5 @@
 <p align="left">
-  <img width="300" height="80" src="./docs/logo.png">
+  <img width="480" height="330" src="./docs/logo.png">
 </p>
 
 # PET Monte Carlo
