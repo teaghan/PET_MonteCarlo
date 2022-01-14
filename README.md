@@ -22,9 +22,15 @@ All of these steps can be accomplished by running the ([run/run_simu.sh](./run/r
 
 ## Analysis code
 
-The code required to bin the root output into sinograms and reconstruct the images could not be made publicly available, so there is a slight jump from the GATE simulation outputs to the sinograms and images. Therefore, we have provided the data files for download.
+The code required to bin the root output into sinograms and reconstruct the images could not be made publicly available, so there is a slight jump from the GATE simulation outputs to the sinograms and images. Therefore, we have provided the necessary data files for download.
 
 ### Data download
 
+### Analysis notebooks
 
+Checkout the following notebooks to see how we comnpared the measured data to our simulations:
+
+- [Uniform cylindrical phantom](./analysis/uniform_cylinder.ipynb)
+- [Line sources](./analysis/line_source.ipynb)
+- [NEMA IEC body image quality phantom](./analysis/nema_image_quality.ipynb)
 
