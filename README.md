@@ -1,3 +1,7 @@
+<p align="left">
+  <img width="300" height="80" src="./docs/logo.png">
+</p>
+
 # PET Monte Carlo
 Simulation and analysis code to accompany the paper (still to come...)
 
