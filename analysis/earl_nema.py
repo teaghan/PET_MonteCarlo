@@ -1,48 +1,7 @@
 import numpy as np
-import glob
 import matplotlib.pyplot as plt
-import pydicom
-from pydicom.tag import Tag
 from skimage.feature import blob_dog
 import pandas as pd 
-
-def load_PET(dicom_dir):
-    '''Load PET scan from dicom directory.
-
-    Parameters:
-    dicom_dir (str): Path to dicom files.
-
-    Returns:
-    pet_scan (numpy array): 3D PET scan.
-    dz, dy, dx (floats): resolution of the PET scan.
-    '''
-    print('Reading dicom directory: %s'%dicom_dir)
-    dcmfiles = [pydicom.read_file(name, force=True) for name in np.sort(glob.glob(dicom_dir+'/*'))]
-
-    # Load PET data
-    pet_scan = []
-    z_locs = []
-    for i, cur_slice in enumerate(dcmfiles):
-        try:
-            # Pixel data with rescaled intensities
-            pet_scan.append(cur_slice.pixel_array * cur_slice.RescaleSlope + cur_slice.RescaleIntercept)
-            # Slice location
-            z_locs.append(float(cur_slice.ImagePositionPatient[2]))
-        except AttributeError:
-            continue
-    pet_scan = np.array(pet_scan)
-    z_locs = np.array(z_locs)
-
-    # Sort the slices
-    pet_scan = pet_scan[np.argsort(z_locs)]
-    print('\tPet scan has shape: %s' % str(pet_scan.shape), end=' ')
-
-    # Obtain resolution info
-    dx, dy = np.array(dcmfiles[0].PixelSpacing).astype(float)
-    dz = float(dcmfiles[0].SliceThickness) 
-    print('and a resolution of (%0.2f, %0.2f, %0.2f)mm' % (dz, dx, dy))
-    
-    return pet_scan, dz, dy, dx
 
 def find_spheres(pet_scan, dz, dy, dx, threshold=0.1, sigma_ratio=1.45):
     '''Use the Difference of Gaussian (DoG) method to locate the spheres.
