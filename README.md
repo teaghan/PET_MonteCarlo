@@ -26,9 +26,13 @@ The code required to bin the root output into sinograms and reconstruct the imag
 
 ### Data download
 
+The data can be downloaded [here](https://zenodo.org/record/5851646) or possibly by just clicking this [link](https://zenodo.org/record/5851646/files/validation_data.zip?download=1).
+
+Once downloaded, unzip the file and place each of the subdirectories within the [patient directory](./patients/). For instance, after doing this you should have a directory tree `PET_MonteCarlo/patients/nema_simu`.
+
 ### Analysis notebooks
 
-Checkout the following notebooks to see how we comnpared the measured data to our simulations:
+Checkout the following notebooks to see how we compared the measured data to our simulations:
 
 - [Uniform cylindrical phantom](./analysis/uniform_cylinder.ipynb)
 - [Line sources](./analysis/line_source.ipynb)
