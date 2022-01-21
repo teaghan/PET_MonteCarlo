@@ -17,12 +17,12 @@ This repository includes scripts to perform Monte Carlo simulations of the Sieme
 ## Running the GATE simulations
 
 1. Before running a simulation, you may have to adjust the module loads for a few of the scripts ([run/mc_job.sh](./run/mc_job.sh) and [run/combine_root.sh](./run/combine_root.sh)) so that they properly load the correct modules on your system. If you have GATE and so forth already loaded then you can just remove these lines from the top of the scripts.
-2. For each simulation, you will need to create a **configuration file** in the [config directory](./patients/configs/). For example, take a look at this [config file](./patients/configs/line_10.ini) for a line source simulation. You will notice that there is a parameter set as `num_jobs=100`. This means that the simulation is going to be split into 100 separate jobs.
-3. Using this configuration, you can generate the voxelized phantom using the commmand `python phantom/generate_phantom.py line_10` which will create a directory tree for this patient in the [patient directory](./patients/).
-4. Next, you can create scripts for each job using the command `python setup_batch_jobs.py line_10` which will save the scripts within the newly created `patients/line_10/scripts/` directory.
-5. If you are running the scripts on one of the Compute Canada servers, you can run the command `python start_simulations.py line_10` to start these simulations, otherwise, you will have to run these separate jobs using your own method.
+2. For each simulation, you will need to create a **configuration file** in the [config directory](./patients/configs/). For example, take a look at this [config file](./patients/configs/line_1.ini) for a line source simulation. You will notice that there is a parameter set as `num_jobs=100`. This means that the simulation is going to be split into 100 separate jobs.
+3. Using this configuration, you can generate the voxelized phantom using the commmand `python phantom/generate_phantom.py line_1` which will create a directory tree for this patient in the [patient directory](./patients/).
+4. Next, you can create scripts for each job using the command `python setup_batch_jobs.py line_1` which will save the scripts within the newly created `patients/line_1/scripts/` directory.
+5. If you are running the scripts on one of the Compute Canada servers, you can run the command `python start_simulations.py line_1` to start these simulations, otherwise, you will have to run these separate jobs using your own method.
 
-All of these steps can be accomplished by running the ([run/run_simu.sh](./run/run_simu.sh) script using the command `./run_simu.sh line_10` inside the [run directory](./run/).
+All of these steps can be accomplished by running the ([run/run_simu.sh](./run/run_simu.sh) script using the command `./run_simu.sh line_1` inside the [run directory](./run/).
 
 ## Analysis code
 
