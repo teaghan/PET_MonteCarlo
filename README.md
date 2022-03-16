@@ -1,5 +1,5 @@
 <p align="left">
-  <img width="480" height="330" src="./docs/logo.png">
+  <img width="480" height="330" src="./docs/XCITElogo.png">
 </p>
 
 # PET Monte Carlo
